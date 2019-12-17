@@ -28,3 +28,8 @@ The cureent given project is incomplete. Please complete it according (or as clo
 - Make the todo items accessible via using the TAB key. When an item is thus focused, it should have an empty circle at its start, and an unterline for the text (there should be a design for that).
   - Pressing `SPACE` when focused on an element should toggle its "done" state. Pressing `BACKSPACE` should delete it.
   - A focused and done item should be both _undelined_ AND _stricken_.
+
+### Extra Special Bonus Points!
+
+- Use the GET API `https://jsonplaceholder.typicode.com/todos` to get the list of initial Todo items.
+- Use the other API methods (POST/PATCH/PUT/DELETE) by the REST convention on that server for every other action you're making (e.g. make a `DELETE https://jsonplaceholder.typicode.com/todos/100` request when deleting the item with ID 100)
