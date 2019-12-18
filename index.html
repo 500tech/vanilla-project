@@ -14,11 +14,19 @@
     </header>
     <main>
       <h2>My Todos List</h2>
+      <form>
+      <input type="text" name="write_item" id="write_item" value="Write up your todo here">
+      <input type="submit" class="add" id="add" value="Add" disabled>
+      </form>
       <ul>
         <li>Have morning coffee</li>
         <li>Eat lunch</li>
         <li>Make awesome things happen</li>
       </ul>
+      <span>
+      <button type="button" name="mark_all">Mark all as done</button>
+      <button type="button" name="delete_all">Delete all done</button>
+      </span>
     </main>
     <footer>
       <small>&copy; Copyright 2058, Example Corporation</small>
