@@ -5,6 +5,20 @@ body {
   color: #efede0;
 }
 
+button, .submit_but{
+  background-color: #efede0;
+  border-radius: 4px;
+  color: #66635a;
+}
+
+.textbox{
+  border-radius: 4px;
+  color: #66635a;
+  width : 200px;
+  transition:  width 2s;
+}
+
+
 header,
 footer {
   padding: 20px;
