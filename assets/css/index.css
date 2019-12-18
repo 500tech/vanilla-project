@@ -27,3 +27,14 @@ main {
   padding: 20px;
   margin-bottom: 58px;
 }
+
+button, .add{
+  background-color:  #efede0;
+  border-radius: 5px;
+  color: #66635a;
+}
+
+#inputText{
+  width: 200px;
+  transition: width 2s;
+}
