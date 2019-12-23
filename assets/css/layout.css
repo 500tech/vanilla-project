@@ -1,0 +1,25 @@
+body {
+  --bgColor: #66635a;
+  --textColor: #efede0;
+  background-color: var(--bgColor);
+  color: var(--textColor);
+}
+
+header,
+footer {
+  padding: 20px;
+  background-color: var(--textColor);
+  color: var(--bgColor);
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+main {
+  padding: 20px;
+  margin-bottom: 58px;
+}

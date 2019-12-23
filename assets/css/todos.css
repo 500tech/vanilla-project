@@ -1,0 +1,44 @@
+#todos-section .done {
+  text-decoration: line-through;
+}
+
+#todos-section .done:focus {
+  text-decoration: line-through underline;
+}
+
+#todos-section ul li:focus {
+  outline: none;
+  text-decoration: underline;
+  list-style-type: circle;
+}
+
+#todos-section button {
+  border: none;
+  outline: none;
+  border-radius: 3px;
+  background-color: var(--textColor);
+  color: var(--bgColor);
+  cursor: pointer;
+}
+
+#todos-section button:active {
+  cursor: grab;
+}
+
+#todos-section button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+#todos-section input {
+  outline: none;
+  border-radius: 3px;
+  border: none;
+  width: 180px;
+  transition: width .2s linear;
+}
+
+#todos-section input:focus,
+#todos-section input:not(:placeholder-shown) {
+  width: 500px;
+}

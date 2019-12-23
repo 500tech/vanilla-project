@@ -12,13 +12,28 @@
     <header>
       <h1>ExCo.</h1>
     </header>
-    <main>
+    <main id="todos-section">
       <h2>My Todos List</h2>
+      <section>
+        <form id="todo-adder">
+          <input
+            type="text"
+            name="todo"
+            placeholder="Write up your todos"
+            required
+          />
+          <button>Add</button>
+        </form>
+      </section>
       <ul>
-        <li>Have morning coffee</li>
-        <li>Eat lunch</li>
-        <li>Make awesome things happen</li>
+        <li tabindex="0">Have morning coffee</li>
+        <li tabindex="0">Eat lunch</li>
+        <li tabindex="0">Make awesome things happen</li>
       </ul>
+      <section class="controls">
+        <button id="mark-done">Mark all as done</button>
+        <button id="delete-done">Delete all done</button>
+      </section>
     </main>
     <footer>
       <small>&copy; Copyright 2058, Example Corporation</small>
