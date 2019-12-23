@@ -29,13 +29,17 @@ const TODOS = [
 
 class TodoItem extends Component {
   render() {
-    const { todo, onToggle = noop } = this.props;
+    const { todo, onToggle = noop, onDelete = noop } = this.props;
     return (
       <li
         tabIndex={0}
         className={todo.completed ? "done" : ""}
-        onClick={() => {
-          onToggle(todo.id);
+        onClick={({ metaKey }) => {
+          if (metaKey) {
+            onDelete(todo.id);
+          } else {
+            onToggle(todo.id);
+          }
         }}
       >
         {todo.title}
@@ -44,11 +48,16 @@ class TodoItem extends Component {
   }
 }
 
-function TodoList({ todos, onToggle }) {
+function TodoList({ todos, onToggle, onDelete }) {
   return (
     <ul>
       {todos.map((todo, index) => (
-        <TodoItem key={index} todo={todo} onToggle={onToggle} />
+        <TodoItem
+          key={index}
+          todo={todo}
+          onToggle={onToggle}
+          onDelete={onDelete}
+        />
       ))}
     </ul>
   );
@@ -75,6 +84,14 @@ class App extends Component {
     });
   };
 
+  deleteTodo = todoId => {
+    const { todos } = this.state;
+    const todosAfterChange = todos.filter(todo => todo.id !== todoId);
+    this.setState({
+      todos: todosAfterChange
+    });
+  };
+
   render() {
     const { todos } = this.state;
     return (
@@ -82,7 +99,11 @@ class App extends Component {
         <Header>ExCo.</Header>
         <MainSection heading="My Todos List">
           <TodoAdder />
-          <TodoList todos={todos} onToggle={this.toggleTodo} />
+          <TodoList
+            todos={todos}
+            onToggle={this.toggleTodo}
+            onDelete={this.deleteTodo}
+          />
           <PageControls />
         </MainSection>
         <Footer copyrightExpiary={2058} name="Example Corporation" />
