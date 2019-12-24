@@ -11,20 +11,3 @@
   text-decoration: underline;
   list-style-type: circle;
 }
-
-#todos-section input {
-  outline: none;
-  border-radius: 3px;
-  border: none;
-  width: 180px;
-  transition: width 0.2s linear;
-}
-
-#todos-section input:focus,
-#todos-section input:not(:placeholder-shown) {
-  width: 500px;
-}
-
-#todos-section section * {
-  margin-right: 5px;
-}
