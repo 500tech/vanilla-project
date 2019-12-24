@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, PureComponent } from "react";
 import ReactDOM from "react-dom";
 import "normalize.css";
 import "./layout.css";
@@ -27,7 +27,7 @@ const TODOS = [
   createTodo("Make awesome things happen")
 ];
 
-class TodoItem extends Component {
+class TodoItem extends PureComponent {
   render() {
     const { todo, onToggle = noop, onDelete = noop } = this.props;
     return (
@@ -51,9 +51,9 @@ class TodoItem extends Component {
 function TodoList({ todos, onToggle, onDelete }) {
   return (
     <ul>
-      {todos.map((todo, index) => (
+      {todos.map(todo => (
         <TodoItem
-          key={index}
+          key={todo.id}
           todo={todo}
           onToggle={onToggle}
           onDelete={onDelete}
@@ -92,6 +92,16 @@ class App extends Component {
     });
   };
 
+  markAllAsDone = () =>
+    this.setState({
+      todos: this.state.todos.map(todo => ({ ...todo, completed: true }))
+    });
+
+  deleteDone = () =>
+    this.setState({
+      todos: this.state.todos.filter(todo => !todo.completed)
+    });
+
   render() {
     const { todos } = this.state;
     return (
@@ -104,7 +114,11 @@ class App extends Component {
             onToggle={this.toggleTodo}
             onDelete={this.deleteTodo}
           />
-          <PageControls />
+          <PageControls
+            todos={todos}
+            onMarkAllAsDone={this.markAllAsDone}
+            onDeleteDone={this.deleteDone}
+          />
         </MainSection>
         <Footer copyrightExpiary={2058} name="Example Corporation" />
       </>
@@ -145,11 +159,21 @@ function MainSection({ children, heading }) {
   );
 }
 
-function PageControls() {
+function PageControls({ onMarkAllAsDone = noop, onDeleteDone = noop, todos }) {
   return (
     <section className="controls">
-      <button id="mark-done">Mark all as done</button>
-      <button id="delete-done">Delete all done</button>
+      <button
+        onClick={onMarkAllAsDone}
+        disabled={todos.every(todo => todo.completed)}
+      >
+        Mark all as done
+      </button>
+      <button
+        onClick={onDeleteDone}
+        disabled={!todos.some(todo => todo.completed)}
+      >
+        Delete all done
+      </button>
     </section>
   );
 }
