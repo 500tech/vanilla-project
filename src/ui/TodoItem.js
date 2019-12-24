@@ -1,4 +1,5 @@
 import React, { PureComponent } from "react";
+import styled from "styled-components";
 import { noop } from "ui/common";
 
 /*
@@ -9,13 +10,13 @@ interface Todo {
 }
 */
 
-export class TodoItem extends PureComponent {
+class BaseTodoItem extends PureComponent {
   render() {
-    const { todo, onToggle = noop, onDelete = noop } = this.props;
+    const { todo, onToggle = noop, onDelete = noop, className } = this.props;
     return (
       <li
         tabIndex={0}
-        className={todo.completed ? "done" : ""}
+        className={className}
         onClick={({ metaKey }) => {
           if (metaKey) {
             onDelete(todo.id);
@@ -29,3 +30,14 @@ export class TodoItem extends PureComponent {
     );
   }
 }
+
+export const TodoItem = styled(BaseTodoItem)`
+  :focus {
+    outline: none;
+    text-decoration: underline
+      ${props => (props.todo.completed ? "line-through" : "")};
+    list-style-type: circle;
+  }
+
+  text-decoration: ${props => (props.todo.completed ? "line-through" : "none")};
+`;

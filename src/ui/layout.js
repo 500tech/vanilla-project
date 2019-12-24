@@ -27,7 +27,7 @@ export function Footer({ copyrightExpiary, name }) {
 
 export function MainSection({ children, heading }) {
   return (
-    <Main id="todos-section">
+    <Main>
       <h2>{heading}</h2>
       {children}
     </Main>
