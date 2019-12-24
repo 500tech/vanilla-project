@@ -1,4 +1,4 @@
-import React, { Component, PureComponent } from "react";
+import React, { Component, PureComponent, createRef } from "react";
 import ReactDOM from "react-dom";
 import "normalize.css";
 import "./layout.css";
@@ -65,7 +65,8 @@ function TodoList({ todos, onToggle, onDelete }) {
 
 class App extends Component {
   state = {
-    todos: TODOS
+    todos: TODOS,
+    showAdder: true
   };
 
   toggleTodo = todoId => {
@@ -114,7 +115,12 @@ class App extends Component {
       <>
         <Header>ExCo.</Header>
         <MainSection heading="My Todos List">
-          <TodoAdder onAddTodo={this.addTodo} />
+          <button
+            onClick={() => this.setState({ showAdder: !this.state.showAdder })}
+          >
+            Toggle Adder
+          </button>
+          {this.state.showAdder ? <TodoAdder onAddTodo={this.addTodo} /> : null}
           <TodoList
             todos={todos}
             onToggle={this.toggleTodo}
@@ -189,6 +195,23 @@ class TodoAdder extends Component {
     text: ""
   };
 
+  input = createRef();
+
+  componentDidMount() {
+    this.input.current.focus();
+  }
+
+  componentDidUpdate(_prevProps, prevState) {
+    if (prevState.text !== this.state.text) {
+      clearTimeout(this.autoSubmitTimer);
+      this.autoSubmitTimer = setTimeout(this.submit, 3000);
+    }
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this.autoSubmitTimer);
+  }
+
   setText(text) {
     if (text.match(/clear/i)) {
       return this.setText("");
@@ -206,19 +229,23 @@ class TodoAdder extends Component {
   };
 
   submit = e => {
-    e.preventDefault();
-    const { text } = this.state;
-    const { onAddTodo = noop } = this.props;
-    onAddTodo(text);
-    this.setText("");
+    console.log("submit!!!");
+    e && e.preventDefault();
+    if (this.isValid()) {
+      const { text } = this.state;
+      const { onAddTodo = noop } = this.props;
+      onAddTodo(text);
+      this.setText("");
+    }
   };
 
   render() {
     const { text } = this.state;
     return (
       <section>
-        <form id="todo-adder" onSubmit={this.submit}>
+        <form onSubmit={this.submit}>
           <input
+            ref={this.input}
             type="text"
             name="todo"
             placeholder="Write up your todos"
