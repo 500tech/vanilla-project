@@ -6,8 +6,8 @@ export const Button = styled.button`
   border: none;
   outline: none;
   border-radius: 3px;
-  background-color: var(--textColor);
-  color: var(--bgColor);
+  background-color: ${props => props.theme.colors.secondary};
+  color: ${props => props.theme.colors.primary};
   cursor: pointer;
 
   :active {
@@ -22,8 +22,8 @@ export const Button = styled.button`
 
 const common = css`
   padding: 20px;
-  background-color: var(--textColor);
-  color: var(--bgColor);
+  background-color: ${props => props.theme.colors.secondary};
+  color: ${props => props.theme.colors.primary};
 `;
 
 export const HeaderSection = styled.header`

@@ -1,8 +1,11 @@
 import React, { Component } from "react";
+import styled, { ThemeProvider } from "styled-components";
 import { Header, Footer, MainSection } from "ui/layout";
 import { PageControls } from "ui/PageControls";
 import { TodoAdder } from "ui/TodoAdder";
 import { TodoList } from "ui/TodoList";
+
+import { lightTheme, darkTheme } from "themes";
 
 /*
 interface Todo {
@@ -26,9 +29,17 @@ const TODOS = [
   createTodo("Make awesome things happen")
 ];
 
+const MainContainer = styled.div`
+  height: 100vh;
+  width: 100vw;
+  background-color: ${props => props.theme.colors.primary};
+  color: ${props => props.theme.colors.secondary};
+`;
+
 export class App extends Component {
   state = {
-    todos: TODOS
+    todos: TODOS,
+    theme: lightTheme
   };
 
   toggleTodo = todoId => {
@@ -71,26 +82,33 @@ export class App extends Component {
     this.setState({ todos: newTodos });
   };
 
+  toggleTheme = () =>
+    this.setState({
+      theme: this.state.theme === lightTheme ? darkTheme : lightTheme
+    });
+
   render() {
-    const { todos } = this.state;
+    const { todos, theme } = this.state;
     return (
-      <>
-        <Header>ExCo.</Header>
-        <MainSection heading="My Todos List">
-          <TodoAdder onAddTodo={this.addTodo} />
-          <TodoList
-            todos={todos}
-            onToggle={this.toggleTodo}
-            onDelete={this.deleteTodo}
-          />
-          <PageControls
-            todos={todos}
-            onMarkAllAsDone={this.markAllAsDone}
-            onDeleteDone={this.deleteDone}
-          />
-        </MainSection>
-        <Footer copyrightExpiary={2058} name="Example Corporation" />
-      </>
+      <ThemeProvider theme={theme}>
+        <MainContainer>
+          <Header onClick={this.toggleTheme}>ExCo.</Header>
+          <MainSection heading="My Todos List">
+            <TodoAdder onAddTodo={this.addTodo} />
+            <TodoList
+              todos={todos}
+              onToggle={this.toggleTodo}
+              onDelete={this.deleteTodo}
+            />
+            <PageControls
+              todos={todos}
+              onMarkAllAsDone={this.markAllAsDone}
+              onDeleteDone={this.deleteDone}
+            />
+          </MainSection>
+          <Footer copyrightExpiary={2058} name="Example Corporation" />
+        </MainContainer>
+      </ThemeProvider>
     );
   }
 }

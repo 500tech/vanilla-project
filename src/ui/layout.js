@@ -1,9 +1,9 @@
 import React from "react";
 import { HeaderSection, FooterSection, Main } from "ui/common";
 
-export function Header({ children }) {
+export function Header({ children, ...props }) {
   return (
-    <HeaderSection>
+    <HeaderSection {...props}>
       <h1>{children}</h1>
     </HeaderSection>
   );

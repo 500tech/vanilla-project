@@ -1,6 +1,0 @@
-body {
-  --bgColor: #66635a;
-  --textColor: #efede0;
-  background-color: var(--bgColor);
-  color: var(--textColor);
-}
