@@ -102,13 +102,19 @@ class App extends Component {
       todos: this.state.todos.filter(todo => !todo.completed)
     });
 
+  addTodo = text => {
+    const todo = createTodo(text);
+    const newTodos = [todo, ...this.state.todos];
+    this.setState({ todos: newTodos });
+  };
+
   render() {
     const { todos } = this.state;
     return (
       <>
         <Header>ExCo.</Header>
         <MainSection heading="My Todos List">
-          <TodoAdder />
+          <TodoAdder onAddTodo={this.addTodo} />
           <TodoList
             todos={todos}
             onToggle={this.toggleTodo}
@@ -178,20 +184,46 @@ function PageControls({ onMarkAllAsDone = noop, onDeleteDone = noop, todos }) {
   );
 }
 
-function TodoAdder() {
-  return (
-    <section>
-      <form id="todo-adder">
-        <input
-          type="text"
-          name="todo"
-          placeholder="Write up your todos"
-          required
-        />
-        <button>Add</button>
-      </form>
-    </section>
-  );
+class TodoAdder extends Component {
+  state = {
+    text: ""
+  };
+
+  updateText = e => {
+    const text = e.target.value;
+    this.setState({ text });
+  };
+
+  isValid = () => {
+    return this.state.text.length > 0;
+  };
+
+  submit = e => {
+    e.preventDefault();
+    const { text } = this.state;
+    const { onAddTodo = noop } = this.props;
+    onAddTodo(text);
+    this.setState({ text: "" });
+  };
+
+  render() {
+    const { text } = this.state;
+    return (
+      <section>
+        <form id="todo-adder" onSubmit={this.submit}>
+          <input
+            type="text"
+            name="todo"
+            placeholder="Write up your todos"
+            required
+            onChange={this.updateText}
+            value={text}
+          />
+          <button disabled={!this.isValid()}>Add</button>
+        </form>
+      </section>
+    );
+  }
 }
 
 ReactDOM.render(
