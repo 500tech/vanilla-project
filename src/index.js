@@ -1,8 +1,27 @@
 import React, { Component, PureComponent, createRef } from "react";
 import ReactDOM from "react-dom";
+import styled from "styled-components";
 import "normalize.css";
 import "./layout.css";
 import "./todos.css";
+
+const Button = styled.button`
+  border: none;
+  outline: none;
+  border-radius: 3px;
+  background-color: var(--textColor);
+  color: var(--bgColor);
+  cursor: pointer;
+
+  :active {
+    cursor: grab;
+  }
+
+  :disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+`;
 
 /*
 interface Todo {
@@ -65,8 +84,7 @@ function TodoList({ todos, onToggle, onDelete }) {
 
 class App extends Component {
   state = {
-    todos: TODOS,
-    showAdder: true
+    todos: TODOS
   };
 
   toggleTodo = todoId => {
@@ -115,12 +133,7 @@ class App extends Component {
       <>
         <Header>ExCo.</Header>
         <MainSection heading="My Todos List">
-          <button
-            onClick={() => this.setState({ showAdder: !this.state.showAdder })}
-          >
-            Toggle Adder
-          </button>
-          {this.state.showAdder ? <TodoAdder onAddTodo={this.addTodo} /> : null}
+          <TodoAdder onAddTodo={this.addTodo} />
           <TodoList
             todos={todos}
             onToggle={this.toggleTodo}
@@ -141,7 +154,7 @@ class App extends Component {
 function Header({ children }) {
   return (
     <header>
-      <h1>{children}</h1>
+      <h1 style={{ color: "red" }}>{children}</h1>
     </header>
   );
 }
@@ -174,18 +187,18 @@ function MainSection({ children, heading }) {
 function PageControls({ onMarkAllAsDone = noop, onDeleteDone = noop, todos }) {
   return (
     <section className="controls">
-      <button
+      <Button
         onClick={onMarkAllAsDone}
         disabled={todos.every(todo => todo.completed)}
       >
         Mark all as done
-      </button>
-      <button
+      </Button>
+      <Button
         onClick={onDeleteDone}
         disabled={!todos.some(todo => todo.completed)}
       >
         Delete all done
-      </button>
+      </Button>
     </section>
   );
 }
@@ -229,7 +242,6 @@ class TodoAdder extends Component {
   };
 
   submit = e => {
-    console.log("submit!!!");
     e && e.preventDefault();
     if (this.isValid()) {
       const { text } = this.state;
@@ -253,7 +265,7 @@ class TodoAdder extends Component {
             onChange={this.updateText}
             value={text}
           />
-          <button disabled={!this.isValid()}>Add</button>
+          <Button disabled={!this.isValid()}>Add</Button>
         </form>
       </section>
     );

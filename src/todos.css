@@ -12,24 +12,6 @@
   list-style-type: circle;
 }
 
-#todos-section button {
-  border: none;
-  outline: none;
-  border-radius: 3px;
-  background-color: var(--textColor);
-  color: var(--bgColor);
-  cursor: pointer;
-}
-
-#todos-section button:active {
-  cursor: grab;
-}
-
-#todos-section button:disabled {
-  cursor: not-allowed;
-  opacity: 0.5;
-}
-
 #todos-section input {
   outline: none;
   border-radius: 3px;

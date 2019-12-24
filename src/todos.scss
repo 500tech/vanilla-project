@@ -1,0 +1,53 @@
+#todos-section {
+  section * {
+    margin-right: 5px;
+  }
+
+  ul {
+    li {
+      &.done {
+        text-decoration: line-through;
+
+        :focus {
+          text-decoration: line-through underline;
+        }
+      }
+      :focus {
+        outline: none;
+        text-decoration: underline;
+        list-style-type: circle;
+      }
+    }
+  }
+
+  button {
+    border: none;
+    outline: none;
+    border-radius: 3px;
+    background-color: var(--textColor);
+    color: var(--bgColor);
+    cursor: pointer;
+
+    :active {
+      cursor: grab;
+    }
+
+    :disabled {
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
+  }
+
+  input {
+    outline: none;
+    border-radius: 3px;
+    border: none;
+    width: 180px;
+    transition: width 0.2s linear;
+
+    :focus,
+    :not(:placeholder-shown) {
+      width: 500px;
+    }
+  }
+}
