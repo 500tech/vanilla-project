@@ -189,9 +189,16 @@ class TodoAdder extends Component {
     text: ""
   };
 
+  setText(text) {
+    if (text.match(/clear/i)) {
+      return this.setText("");
+    }
+    this.setState({ text });
+  }
+
   updateText = e => {
     const text = e.target.value;
-    this.setState({ text });
+    this.setText(text);
   };
 
   isValid = () => {
@@ -203,7 +210,7 @@ class TodoAdder extends Component {
     const { text } = this.state;
     const { onAddTodo = noop } = this.props;
     onAddTodo(text);
-    this.setState({ text: "" });
+    this.setText("");
   };
 
   render() {
