@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { HeaderSection, FooterSection, Main } from "ui/common";
+import { AddressBar } from "ui/AddressBar";
 
 const Nav = styled.nav`
   &&& {
@@ -16,6 +17,7 @@ export function Header({ children, ...props }) {
   return (
     <HeaderSection>
       <h1 {...props}>{children}</h1>
+      <AddressBar />
       <Nav>
         <Link to="/">Home</Link>
         <Link to="/todos">Todos</Link>
