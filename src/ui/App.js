@@ -1,11 +1,10 @@
 import React, { Component } from "react";
 import styled, { ThemeProvider } from "styled-components";
 import { Route, Switch } from "react-router-dom";
-import { Header, Footer, MainSection } from "ui/layout";
-import { PageControls } from "ui/PageControls";
-import { TodoAdder } from "ui/TodoAdder";
-import { TodoList } from "ui/TodoList";
-
+import { Header, Footer } from "ui/layout";
+import { Home } from "ui/Home";
+import { Todos } from "ui/Todos";
+import { PageNotFound } from "ui/PageNotFound";
 import { lightTheme, darkTheme } from "themes";
 
 /*
@@ -36,39 +35,6 @@ const MainContainer = styled.div`
   background-color: ${props => props.theme.colors.primary};
   color: ${props => props.theme.colors.secondary};
 `;
-
-function Home() {
-  return (
-    <MainSection heading="Home Page">
-      <blockquote>Be the route you want to see in the router</blockquote>
-    </MainSection>
-  );
-}
-
-function PageNotFound() {
-  return <MainSection heading="Page not found :(" />;
-}
-
-function Todos({
-  addTodo,
-  todos,
-  toggleTodo,
-  deleteTodo,
-  markAllAsDone,
-  deleteDone
-}) {
-  return (
-    <MainSection heading="My Todos List">
-      <TodoAdder onAddTodo={addTodo} />
-      <TodoList todos={todos} onToggle={toggleTodo} onDelete={deleteTodo} />
-      <PageControls
-        todos={todos}
-        onMarkAllAsDone={markAllAsDone}
-        onDeleteDone={deleteDone}
-      />
-    </MainSection>
-  );
-}
 
 export class App extends Component {
   state = {
