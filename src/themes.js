@@ -11,3 +11,10 @@ export const darkTheme = {
     secondary: "#1bc2c3"
   }
 };
+
+export const madTheme = {
+  colors: {
+    primary: "#270645",
+    secondary: "#fcf986"
+  }
+};

@@ -30,6 +30,7 @@ export const HeaderSection = styled.header`
   ${common}
   display: flex;
   justify-content: space-between;
+  align-items: center;
   h1 {
     margin: 0;
   }

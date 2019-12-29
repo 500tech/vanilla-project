@@ -17,9 +17,16 @@ const Nav = styled.nav`
 export function Header({ children }) {
   return (
     <ThemeConsumer>
-      {({ toggleTheme }) => (
+      {({ toggleTheme, themeName, setTheme, themeNames }) => (
         <HeaderSection>
           <h1 onClick={toggleTheme}>{children}</h1>
+          <select value={themeName} onChange={e => setTheme(e.target.value)}>
+            {themeNames.map(name => (
+              <option key={name} value={name}>
+                {name}
+              </option>
+            ))}
+          </select>
           <AddressBar />
           <Nav>
             <Link to="/">Home</Link>
