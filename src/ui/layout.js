@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { HeaderSection, FooterSection, Main } from "ui/common";
 import { AddressBar } from "ui/AddressBar";
-import { ThemeConsumer } from "services/theme";
+import { useThemeService } from "services/theme";
 
 const Nav = styled.nav`
   &&& {
@@ -15,26 +15,23 @@ const Nav = styled.nav`
 `;
 
 export function Header({ children }) {
+  const { toggleTheme, themeName, setTheme, themeNames } = useThemeService();
   return (
-    <ThemeConsumer>
-      {({ toggleTheme, themeName, setTheme, themeNames }) => (
-        <HeaderSection>
-          <h1 onClick={toggleTheme}>{children}</h1>
-          <select value={themeName} onChange={e => setTheme(e.target.value)}>
-            {themeNames.map(name => (
-              <option key={name} value={name}>
-                {name}
-              </option>
-            ))}
-          </select>
-          <AddressBar />
-          <Nav>
-            <Link to="/">Home</Link>
-            <Link to="/todos">Todos</Link>
-          </Nav>
-        </HeaderSection>
-      )}
-    </ThemeConsumer>
+    <HeaderSection>
+      <h1 onClick={toggleTheme}>{children}</h1>
+      <select value={themeName} onChange={e => setTheme(e.target.value)}>
+        {themeNames.map(name => (
+          <option key={name} value={name}>
+            {name}
+          </option>
+        ))}
+      </select>
+      <AddressBar />
+      <Nav>
+        <Link to="/">Home</Link>
+        <Link to="/todos">Todos</Link>
+      </Nav>
+    </HeaderSection>
   );
 }
 
