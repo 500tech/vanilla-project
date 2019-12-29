@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import styled, { ThemeProvider } from "styled-components";
+import { Route, Switch } from "react-router-dom";
 import { Header, Footer, MainSection } from "ui/layout";
 import { PageControls } from "ui/PageControls";
 import { TodoAdder } from "ui/TodoAdder";
@@ -35,6 +36,39 @@ const MainContainer = styled.div`
   background-color: ${props => props.theme.colors.primary};
   color: ${props => props.theme.colors.secondary};
 `;
+
+function Home() {
+  return (
+    <MainSection heading="Home Page">
+      <blockquote>Be the route you want to see in the router</blockquote>
+    </MainSection>
+  );
+}
+
+function PageNotFound() {
+  return <MainSection heading="Page not found :(" />;
+}
+
+function Todos({
+  addTodo,
+  todos,
+  toggleTodo,
+  deleteTodo,
+  markAllAsDone,
+  deleteDone
+}) {
+  return (
+    <MainSection heading="My Todos List">
+      <TodoAdder onAddTodo={addTodo} />
+      <TodoList todos={todos} onToggle={toggleTodo} onDelete={deleteTodo} />
+      <PageControls
+        todos={todos}
+        onMarkAllAsDone={markAllAsDone}
+        onDeleteDone={deleteDone}
+      />
+    </MainSection>
+  );
+}
 
 export class App extends Component {
   state = {
@@ -88,24 +122,30 @@ export class App extends Component {
     });
 
   render() {
-    const { todos, theme } = this.state;
+    const { theme } = this.state;
     return (
       <ThemeProvider theme={theme}>
         <MainContainer>
           <Header onClick={this.toggleTheme}>ExCo.</Header>
-          <MainSection heading="My Todos List">
-            <TodoAdder onAddTodo={this.addTodo} />
-            <TodoList
-              todos={todos}
-              onToggle={this.toggleTodo}
-              onDelete={this.deleteTodo}
+          <Switch>
+            <Route path="/" exact component={Home} />
+            <Route
+              path="/todos"
+              render={() => {
+                return (
+                  <Todos
+                    addTodo={this.addTodo}
+                    todos={this.state.todos}
+                    toggleTodo={this.toggleTodo}
+                    deleteTodo={this.deleteTodo}
+                    markAllAsDone={this.markAllAsDone}
+                    deleteDone={this.deleteDone}
+                  />
+                );
+              }}
             />
-            <PageControls
-              todos={todos}
-              onMarkAllAsDone={this.markAllAsDone}
-              onDeleteDone={this.deleteDone}
-            />
-          </MainSection>
+            <Route component={PageNotFound} />
+          </Switch>
           <Footer copyrightExpiary={2058} name="Example Corporation" />
         </MainContainer>
       </ThemeProvider>
