@@ -50,3 +50,14 @@ export function MainSection({ children, heading }) {
     </Main>
   );
 }
+
+export const MainContainer = styled.div`
+  height: 100vh;
+  width: 100vw;
+  background-color: ${props => props.theme.colors.primary};
+  color: ${props => props.theme.colors.secondary};
+
+  a {
+    color: ${props => props.theme.colors.secondary};
+  }
+`;
