@@ -28,6 +28,8 @@ const common = css`
 
 export const HeaderSection = styled.header`
   ${common}
+  display: flex;
+  justify-content: space-between;
   h1 {
     margin: 0;
   }

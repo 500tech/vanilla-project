@@ -34,6 +34,10 @@ const MainContainer = styled.div`
   width: 100vw;
   background-color: ${props => props.theme.colors.primary};
   color: ${props => props.theme.colors.secondary};
+
+  a {
+    color: ${props => props.theme.colors.secondary};
+  }
 `;
 
 export class App extends Component {

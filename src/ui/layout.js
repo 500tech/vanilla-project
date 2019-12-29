@@ -1,10 +1,25 @@
 import React from "react";
+import styled from "styled-components";
+import { Link } from "react-router-dom";
 import { HeaderSection, FooterSection, Main } from "ui/common";
+
+const Nav = styled.nav`
+  &&& {
+    a {
+      margin-left: 5px;
+      color: ${props => props.theme.colors.primary};
+    }
+  }
+`;
 
 export function Header({ children, ...props }) {
   return (
-    <HeaderSection {...props}>
-      <h1>{children}</h1>
+    <HeaderSection>
+      <h1 {...props}>{children}</h1>
+      <Nav>
+        <Link to="/">Home</Link>
+        <Link to="/todos">Todos</Link>
+      </Nav>
     </HeaderSection>
   );
 }

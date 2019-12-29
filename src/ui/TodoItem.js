@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 import { noop } from "ui/common";
 
 /*
@@ -14,18 +15,19 @@ class BaseTodoItem extends PureComponent {
   render() {
     const { todo, onToggle = noop, onDelete = noop, className } = this.props;
     return (
-      <li
-        tabIndex={0}
-        className={className}
-        onClick={({ metaKey }) => {
-          if (metaKey) {
-            onDelete(todo.id);
-          } else {
-            onToggle(todo.id);
-          }
-        }}
-      >
-        {todo.title}
+      <li tabIndex={0} className={className}>
+        <span
+          onClick={({ metaKey }) => {
+            if (metaKey) {
+              onDelete(todo.id);
+            } else {
+              onToggle(todo.id);
+            }
+          }}
+        >
+          {todo.title}
+        </span>
+        <Link to={`/todos/${todo.id}`}>Select</Link>
       </li>
     );
   }
@@ -34,10 +36,20 @@ class BaseTodoItem extends PureComponent {
 export const TodoItem = styled(BaseTodoItem)`
   :focus {
     outline: none;
-    text-decoration: underline
-      ${props => (props.todo.completed ? "line-through" : "")};
+
     list-style-type: circle;
   }
 
-  text-decoration: ${props => (props.todo.completed ? "line-through" : "none")};
+  span {
+    text-decoration: ${props =>
+      props.todo.completed ? "line-through" : "none"};
+    :focus {
+      text-decoration: underline
+        ${props => (props.todo.completed ? "line-through" : "")};
+    }
+  }
+
+  a {
+    margin-left: 5px;
+  }
 `;
