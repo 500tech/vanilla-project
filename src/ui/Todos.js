@@ -4,8 +4,29 @@ import { MainSection } from "ui/layout";
 import { PageControls } from "ui/PageControls";
 import { TodoAdder } from "ui/TodoAdder";
 import { TodoList } from "ui/TodoList";
+import { TodosConsumer } from "services/todos";
 
-export function Todos({
+function TodoDescription({ match }) {
+  const { params } = match;
+  const { todoId } = params;
+  return (
+    <TodosConsumer>
+      {({ todos }) => {
+        const todo = todos.find(todo => todo.id === +todoId);
+        if (!todo) {
+          return <Redirect to="/todos" />;
+        }
+        return (
+          <h3>
+            <code>{JSON.stringify(todo)}</code>
+          </h3>
+        );
+      }}
+    </TodosConsumer>
+  );
+}
+
+export function BaseTodos({
   addTodo,
   todos,
   toggleTodo,
@@ -22,22 +43,11 @@ export function Todos({
         onMarkAllAsDone={markAllAsDone}
         onDeleteDone={deleteDone}
       />
-      <Route
-        path="/todos/:todoId"
-        render={({ match }) => {
-          const { params } = match;
-          const { todoId } = params;
-          const todo = todos.find(todo => todo.id === +todoId);
-          if (!todo) {
-            return <Redirect to="/todos" />;
-          }
-          return (
-            <h3>
-              <code>{JSON.stringify(todo)}</code>
-            </h3>
-          );
-        }}
-      />
+      <Route path="/todos/:todoId" component={TodoDescription} />
     </MainSection>
   );
+}
+
+export function Todos() {
+  return <TodosConsumer>{ctx => <BaseTodos {...ctx} />}</TodosConsumer>;
 }
