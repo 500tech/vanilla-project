@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { HeaderSection, FooterSection, Main } from "ui/common";
 import { AddressBar } from "ui/AddressBar";
+import { ThemeConsumer } from "services/theme";
 
 const Nav = styled.nav`
   &&& {
@@ -13,16 +14,20 @@ const Nav = styled.nav`
   }
 `;
 
-export function Header({ children, ...props }) {
+export function Header({ children }) {
   return (
-    <HeaderSection>
-      <h1 {...props}>{children}</h1>
-      <AddressBar />
-      <Nav>
-        <Link to="/">Home</Link>
-        <Link to="/todos">Todos</Link>
-      </Nav>
-    </HeaderSection>
+    <ThemeConsumer>
+      {({ toggleTheme }) => (
+        <HeaderSection>
+          <h1 onClick={toggleTheme}>{children}</h1>
+          <AddressBar />
+          <Nav>
+            <Link to="/">Home</Link>
+            <Link to="/todos">Todos</Link>
+          </Nav>
+        </HeaderSection>
+      )}
+    </ThemeConsumer>
   );
 }
 
