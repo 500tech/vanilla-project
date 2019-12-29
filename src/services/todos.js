@@ -1,8 +1,12 @@
-import React, { Component, createContext } from "react";
+import React, { Component, createContext, useState, useContext } from "react";
 
 const TodosContext = createContext();
 
 export const TodosConsumer = TodosContext.Consumer;
+
+export function useTodosService() {
+  return useContext(TodosContext);
+}
 
 /*
 interface Todo {
@@ -26,7 +30,50 @@ const TODOS = [
   createTodo("Make awesome things happen")
 ];
 
-export class TodosService extends Component {
+export function TodosService({ children }) {
+  const [todos, setTodos] = useState(TODOS);
+  const toggleTodo = todoId => {
+    const todosAfterChange = todos.map(todo => {
+      if (todo.id === todoId) {
+        return {
+          ...todo,
+          completed: !todo.completed
+        };
+      }
+      return todo;
+    });
+    setTodos(todosAfterChange);
+  };
+
+  const deleteTodo = todoId => {
+    const todosAfterChange = todos.filter(todo => todo.id !== todoId);
+    setTodos(todosAfterChange);
+  };
+
+  const markAllAsDone = () =>
+    setTodos(todos.map(todo => ({ ...todo, completed: true })));
+
+  const deleteDone = () => setTodos(todos.filter(todo => !todo.completed));
+
+  const addTodo = text => {
+    const todo = createTodo(text);
+    const newTodos = [todo, ...todos];
+    setTodos(newTodos);
+  };
+
+  const ctx = {
+    todos,
+    addTodo,
+    toggleTodo,
+    deleteDone,
+    deleteTodo,
+    markAllAsDone
+  };
+
+  return <TodosContext.Provider value={ctx}>{children}</TodosContext.Provider>;
+}
+
+export class TodosServiceLegacy extends Component {
   state = {
     todos: TODOS
   };
