@@ -1,13 +1,37 @@
-import React, { Component } from "react";
+import React, { Component, useState, useEffect } from "react";
 import styled from "styled-components";
-import { withRouter } from "react-router-dom";
+import { useLocation, useHistory } from "react-router-dom";
 import { Input, Button } from "ui/common";
 
 const Form = styled.form`
   display: flex;
 `;
 
-export class BaseAddressBar extends Component {
+export function AddressBar() {
+  const location = useLocation();
+  const history = useHistory();
+  const [url, setUrl] = useState(location.pathname);
+  useEffect(() => {
+    setUrl(location.pathname);
+  }, [location.pathname]);
+  const onSubmit = e => {
+    e.preventDefault();
+    history.push(url);
+  };
+  return (
+    <Form onSubmit={onSubmit}>
+      <Button type="button" onClick={() => history.goBack()}>
+        Back
+      </Button>
+      <Input required value={url} onChange={e => setUrl(e.target.value)} />
+      <Button type="button" onClick={() => history.goForward()}>
+        Forward
+      </Button>
+    </Form>
+  );
+}
+
+export class BaseAddressBarLegacy extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -50,4 +74,4 @@ export class BaseAddressBar extends Component {
   }
 }
 
-export const AddressBar = withRouter(BaseAddressBar);
+// export const AddressBar = withRouter(BaseAddressBar);

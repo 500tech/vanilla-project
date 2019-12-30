@@ -1,14 +1,13 @@
 import React, { useMemo } from "react";
-import { Route, Redirect } from "react-router-dom";
+import { Route, Redirect, useParams } from "react-router-dom";
 import { MainSection } from "ui/layout";
 import { PageControls } from "ui/PageControls";
 import { TodoAdder } from "ui/TodoAdder";
 import { TodoList } from "ui/TodoList";
 import { useTodosService } from "services/todos";
 
-function TodoDescription({ match }) {
-  const { params } = match;
-  const { todoId } = params;
+function TodoDescription() {
+  const { todoId } = useParams();
   const { todos } = useTodosService();
   const todo = useMemo(() => todos.find(todo => todo.id === +todoId), [
     todos,
@@ -42,7 +41,9 @@ export function Todos() {
         onMarkAllAsDone={markAllAsDone}
         onDeleteDone={deleteDone}
       />
-      <Route path="/todos/:todoId" component={TodoDescription} />
+      <Route path="/todos/:todoId">
+        <TodoDescription />
+      </Route>
     </MainSection>
   );
 }
