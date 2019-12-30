@@ -14,3 +14,5 @@ export function Home() {
     </MainSection>
   );
 }
+
+export default Home;

@@ -10,7 +10,7 @@ export function PageNotFound() {
       setTtr(ttr - 1);
     }, 1000);
     return () => clearTimeout(timer);
-  }, [ttr])
+  }, [ttr]);
   if (ttr === 0) {
     return <Redirect to="/" />;
   }
@@ -50,3 +50,5 @@ export class PageNotFoundLegacy extends Component {
     );
   }
 }
+
+export default PageNotFound;

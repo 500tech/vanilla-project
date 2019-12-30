@@ -28,3 +28,5 @@ export function Todos() {
     </MainSection>
   );
 }
+
+export default Todos;
