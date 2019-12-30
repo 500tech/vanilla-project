@@ -7,9 +7,15 @@ import { PageNotFound } from "ui/PageNotFound";
 export function MainView() {
   return (
     <Switch>
-      <Route path="/" exact component={Home} />
-      <Route path="/todos" component={Todos} />
-      <Route component={PageNotFound} />
+      <Route path="/" exact>
+        <Home />
+      </Route>
+      <Route path="/todos">
+        <Todos />
+      </Route>
+      <Route>
+        <PageNotFound />
+      </Route>
     </Switch>
   );
 }

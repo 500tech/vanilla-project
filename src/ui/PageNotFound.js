@@ -1,15 +1,10 @@
 import React, { Component, useState, useEffect } from "react";
-import { Redirect } from "react-router-dom";
+import { Redirect, useLocation } from "react-router-dom";
 import { MainSection } from "ui/layout";
 
-export function PageNotFound({ location }) {
+export function PageNotFound() {
   const [ttr, setTtr] = useState(3);
-  // useEffect(() => {
-  //   const timer = setInterval(() => {
-  //     setTtr(ttr => ttr - 1);
-  //   }, 1000);
-  //   return () => clearInterval(timer);
-  // }, []);
+  const location = useLocation();
   useEffect(() => {
     const timer = setTimeout(() => {
       setTtr(ttr - 1);
