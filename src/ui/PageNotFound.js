@@ -1,8 +1,32 @@
-import React, { Component } from "react";
+import React, { Component, useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
 import { MainSection } from "ui/layout";
 
-export class PageNotFound extends Component {
+export function PageNotFound({ location }) {
+  const [ttr, setTtr] = useState(3);
+  // useEffect(() => {
+  //   const timer = setInterval(() => {
+  //     setTtr(ttr => ttr - 1);
+  //   }, 1000);
+  //   return () => clearInterval(timer);
+  // }, []);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setTtr(ttr - 1);
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, [ttr])
+  if (ttr === 0) {
+    return <Redirect to="/" />;
+  }
+  return (
+    <MainSection heading={`Page ${location.pathname} not found :(`}>
+      <h3>Redirecting to home page in {ttr}...</h3>
+    </MainSection>
+  );
+}
+
+export class PageNotFoundLegacy extends Component {
   state = {
     ttr: 3
   };
@@ -14,12 +38,6 @@ export class PageNotFound extends Component {
       });
     }, 1000);
   }
-
-  // componentDidUpdate() {
-  //   if (this.state.ttr === 0) {
-  //     this.props.history.replace("/");
-  //   }
-  // }
 
   componentWillUnmount() {
     clearInterval(this.timer);

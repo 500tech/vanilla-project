@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react";
+import React, { memo } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { noop } from "ui/common";
@@ -11,29 +11,32 @@ interface Todo {
 }
 */
 
-class BaseTodoItem extends PureComponent {
-  render() {
-    const { todo, onToggle = noop, onDelete = noop, className } = this.props;
-    return (
-      <li tabIndex={0} className={className}>
-        <span
-          onClick={({ metaKey }) => {
-            if (metaKey) {
-              onDelete(todo.id);
-            } else {
-              onToggle(todo.id);
-            }
-          }}
-        >
-          {todo.title}
-        </span>
-        <Link to={`/todos/${todo.id}`}>Select</Link>
-      </li>
-    );
-  }
-}
+const BaseTodoItem = ({
+  todo,
+  onToggle = noop,
+  onDelete = noop,
+  className
+}) => {
+  console.log("render");
+  return (
+    <li tabIndex={0} className={className}>
+      <span
+        onClick={({ metaKey }) => {
+          if (metaKey) {
+            onDelete(todo.id);
+          } else {
+            onToggle(todo.id);
+          }
+        }}
+      >
+        {todo.title}
+      </span>
+      <Link to={`/todos/${todo.id}`}>Select</Link>
+    </li>
+  );
+};
 
-export const TodoItem = styled(BaseTodoItem)`
+export const TodoItem = styled(memo(BaseTodoItem))`
   :focus {
     outline: none;
 

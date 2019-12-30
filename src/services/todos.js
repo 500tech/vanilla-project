@@ -1,4 +1,10 @@
-import React, { Component, createContext, useState, useContext } from "react";
+import React, {
+  Component,
+  createContext,
+  useState,
+  useContext,
+  useCallback
+} from "react";
 
 const TodosContext = createContext();
 
@@ -32,23 +38,23 @@ const TODOS = [
 
 export function TodosService({ children }) {
   const [todos, setTodos] = useState(TODOS);
-  const toggleTodo = todoId => {
-    const todosAfterChange = todos.map(todo => {
-      if (todo.id === todoId) {
-        return {
-          ...todo,
-          completed: !todo.completed
-        };
-      }
-      return todo;
-    });
-    setTodos(todosAfterChange);
-  };
+  const toggleTodo = useCallback(todoId => {
+    setTodos(todos =>
+      todos.map(todo => {
+        if (todo.id === todoId) {
+          return {
+            ...todo,
+            completed: !todo.completed
+          };
+        }
+        return todo;
+      })
+    );
+  }, []);
 
-  const deleteTodo = todoId => {
-    const todosAfterChange = todos.filter(todo => todo.id !== todoId);
-    setTodos(todosAfterChange);
-  };
+  const deleteTodo = useCallback(todoId => {
+    setTodos(todos => todos.filter(todo => todo.id !== todoId));
+  }, []);
 
   const markAllAsDone = () =>
     setTodos(todos.map(todo => ({ ...todo, completed: true })));
