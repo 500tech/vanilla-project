@@ -1,12 +1,10 @@
-import React, { useRef, useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { MainSection } from "ui/layout";
+import { useAutofocus } from "hooks/autofocus";
 
 export function Home() {
-  const link = useRef();
-  useEffect(() => {
-    link.current.focus();
-  }, []);
+  const link = useAutofocus();
   return (
     <MainSection heading="Home Page">
       <blockquote>Be the route you want to see in the router</blockquote>

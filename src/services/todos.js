@@ -1,10 +1,4 @@
-import React, {
-  Component,
-  createContext,
-  useState,
-  useContext,
-  useCallback
-} from "react";
+import React, { Component, createContext, useContext } from "react";
 
 const TodosContext = createContext();
 
@@ -36,50 +30,7 @@ const TODOS = [
   createTodo("Make awesome things happen")
 ];
 
-export function TodosService({ children }) {
-  const [todos, setTodos] = useState(TODOS);
-  const toggleTodo = useCallback(todoId => {
-    setTodos(todos =>
-      todos.map(todo => {
-        if (todo.id === todoId) {
-          return {
-            ...todo,
-            completed: !todo.completed
-          };
-        }
-        return todo;
-      })
-    );
-  }, []);
-
-  const deleteTodo = useCallback(todoId => {
-    setTodos(todos => todos.filter(todo => todo.id !== todoId));
-  }, []);
-
-  const markAllAsDone = () =>
-    setTodos(todos.map(todo => ({ ...todo, completed: true })));
-
-  const deleteDone = () => setTodos(todos.filter(todo => !todo.completed));
-
-  const addTodo = text => {
-    const todo = createTodo(text);
-    const newTodos = [todo, ...todos];
-    setTodos(newTodos);
-  };
-
-  const ctx = {
-    todos,
-    addTodo,
-    toggleTodo,
-    deleteDone,
-    deleteTodo,
-    markAllAsDone
-  };
-
-  return <TodosContext.Provider value={ctx}>{children}</TodosContext.Provider>;
-}
-
-export class TodosServiceLegacy extends Component {
+export class TodosService extends Component {
   state = {
     todos: TODOS
   };

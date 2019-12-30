@@ -1,7 +1,58 @@
-import React, { Component, createRef } from "react";
+import React, {
+  Component,
+  createRef,
+  useState,
+  useEffect,
+  useCallback
+} from "react";
 import { Button, Input, noop } from "ui/common";
+import { useAutofocus } from "hooks/autofocus";
 
-export class TodoAdder extends Component {
+const isValid = text => text.length > 0;
+
+export function TodoAdder({ onAddTodo = noop }) {
+  const [text, setText] = useState("");
+  const input = useAutofocus();
+  useEffect(() => {
+    if (text.match(/clear/i)) {
+      setText("");
+    }
+  }, [text]);
+  const submitText = useCallback(text => {
+    if (isValid(text)) {
+      onAddTodo(text);
+      setText("");
+    }
+  }, [onAddTodo]);
+  useEffect(() => {
+    const timer = setTimeout(submitText, 3000, text);
+    return () => clearTimeout(timer);
+  }, [submitText, text]);
+
+  return (
+    <section>
+      <form
+        onSubmit={e => {
+          e.preventDefault();
+          submitText(text);
+        }}
+      >
+        <Input
+          ref={input}
+          type="text"
+          name="todo"
+          placeholder="Write up your todos"
+          required
+          onChange={e => setText(e.target.value)}
+          value={text}
+        />
+        <Button disabled={!isValid(text)}>Add</Button>
+      </form>
+    </section>
+  );
+}
+
+export class TodoAdderLegacy extends Component {
   state = {
     text: ""
   };
