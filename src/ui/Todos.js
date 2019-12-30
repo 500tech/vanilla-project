@@ -1,5 +1,5 @@
-import React, { useMemo } from "react";
-import { Route, Redirect, useParams } from "react-router-dom";
+import React from "react";
+import { Redirect, useRouteMatch } from "react-router-dom";
 import { MainSection } from "ui/layout";
 import { PageControls } from "ui/PageControls";
 import { TodoAdder } from "ui/TodoAdder";
@@ -7,12 +7,15 @@ import { TodoList } from "ui/TodoList";
 import { useTodosService } from "services/todos";
 
 function TodoDescription() {
-  const { todoId } = useParams();
+  const match = useRouteMatch("/todos/:todoId");
   const { todos } = useTodosService();
-  const todo = useMemo(() => todos.find(todo => todo.id === +todoId), [
-    todos,
-    todoId
-  ]);
+  if (!match || !match.isExact) {
+    return null;
+  }
+
+  const { todoId } = match.params;
+  const todo = todos.find(todo => todo.id === +todoId);
+
   if (!todo) {
     return <Redirect to="/todos" />;
   }
@@ -41,9 +44,7 @@ export function Todos() {
         onMarkAllAsDone={markAllAsDone}
         onDeleteDone={deleteDone}
       />
-      <Route path="/todos/:todoId">
-        <TodoDescription />
-      </Route>
+      <TodoDescription />
     </MainSection>
   );
 }
