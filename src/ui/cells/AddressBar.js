@@ -7,13 +7,15 @@ const Form = styled.form`
   display: flex;
 `;
 
+const locationToUrl = ({ pathname, search, hash }) => pathname + search + hash;
+
 export function AddressBar() {
   const location = useLocation();
   const history = useHistory();
-  const [url, setUrl] = useState(location.pathname);
+  const [url, setUrl] = useState(locationToUrl(location));
   useEffect(() => {
-    setUrl(location.pathname);
-  }, [location.pathname]);
+    setUrl(locationToUrl(location));
+  }, [location]);
   const onSubmit = e => {
     e.preventDefault();
     history.push(url);
