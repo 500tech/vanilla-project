@@ -17,7 +17,17 @@ const BaseTodoItem = ({
   className
 }) => {
   return (
-    <li tabIndex={0} className={className}>
+    <li
+      tabIndex={0}
+      className={className}
+      onKeyDown={e => {
+        if (e.key === "Backspace") {
+          onDelete(todo.id);
+        } else if (e.key === " ") {
+          onToggle(todo.id);
+        }
+      }}
+    >
       <span
         onClick={({ metaKey }) => {
           if (metaKey) {
@@ -39,15 +49,20 @@ export const TodoItem = styled(memo(BaseTodoItem))`
     outline: none;
 
     list-style-type: circle;
+
+    span {
+      text-decoration: underline
+        ${props => (props.todo.completed ? "line-through" : "")};
+    }
+  }
+
+  * {
+    color: ${props => props.theme.colors.secondary};
   }
 
   span {
     text-decoration: ${props =>
       props.todo.completed ? "line-through" : "none"};
-    :focus {
-      text-decoration: underline
-        ${props => (props.todo.completed ? "line-through" : "")};
-    }
   }
 
   a {
