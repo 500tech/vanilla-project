@@ -1,5 +1,5 @@
 import React from "react";
-import { TodoItem } from "ui/TodoItem";
+import { TodoItem } from "ui/orgs/Todos/mols/TodoItem";
 
 export function TodoList({ todos, onToggle, onDelete }) {
   return (

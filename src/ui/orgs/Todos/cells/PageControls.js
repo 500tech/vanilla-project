@@ -1,5 +1,6 @@
 import React from "react";
-import { Button, noop } from "ui/common";
+import { noop } from "utils";
+import { Button } from "ui/atoms";
 
 export function PageControls({
   onMarkAllAsDone = noop,

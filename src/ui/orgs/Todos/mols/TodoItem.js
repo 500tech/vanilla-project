@@ -1,8 +1,7 @@
 import React, { memo } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { noop } from "ui/common";
-
+import { noop } from "utils";
 /*
 interface Todo {
   id: number;
@@ -17,7 +16,6 @@ const BaseTodoItem = ({
   onDelete = noop,
   className
 }) => {
-  console.log("render");
   return (
     <li tabIndex={0} className={className}>
       <span

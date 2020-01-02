@@ -1,6 +1,6 @@
 import React, { Component, useState, useEffect } from "react";
 import { Redirect, useLocation } from "react-router-dom";
-import { MainSection } from "ui/layout";
+import { MainSection } from "ui/mols";
 
 export function PageNotFound() {
   const [ttr, setTtr] = useState(3);

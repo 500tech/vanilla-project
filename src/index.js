@@ -4,13 +4,13 @@ import { BrowserRouter as Router } from "react-router-dom";
 import "normalize.css";
 import { TodosService } from "services/todos";
 import { ThemeService } from "services/theme";
-import { App } from "ui/App";
+import { Ecosystem } from "ui/eco";
 
 ReactDOM.render(
   <Router>
     <TodosService>
       <ThemeService>
-        <App />
+        <Ecosystem />
       </ThemeService>
     </TodosService>
   </Router>,

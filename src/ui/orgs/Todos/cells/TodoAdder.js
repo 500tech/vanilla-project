@@ -5,7 +5,8 @@ import React, {
   useEffect,
   useCallback
 } from "react";
-import { Button, Input, noop } from "ui/common";
+import { noop } from "utils";
+import { Button, Input } from "ui/atoms";
 import { useAutofocus } from "hooks/autofocus";
 
 const isValid = text => text.length > 0;
@@ -18,12 +19,15 @@ export function TodoAdder({ onAddTodo = noop }) {
       setText("");
     }
   }, [text]);
-  const submitText = useCallback(text => {
-    if (isValid(text)) {
-      onAddTodo(text);
-      setText("");
-    }
-  }, [onAddTodo]);
+  const submitText = useCallback(
+    text => {
+      if (isValid(text)) {
+        onAddTodo(text);
+        setText("");
+      }
+    },
+    [onAddTodo]
+  );
   useEffect(() => {
     const timer = setTimeout(submitText, 3000, text);
     return () => clearTimeout(timer);

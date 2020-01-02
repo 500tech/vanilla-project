@@ -1,9 +1,9 @@
 import React from "react";
-import { MainSection } from "ui/layout";
-import { PageControls } from "ui/PageControls";
-import { TodoAdder } from "ui/TodoAdder";
-import { TodoList } from "ui/TodoList";
-import { TodoDescription } from "ui/TodoDescription";
+import { MainSection } from "ui/mols";
+import { PageControls } from "./cells/PageControls";
+import { TodoAdder } from "./cells/TodoAdder";
+import { TodoList } from "./cells/TodoList";
+import { TodoDescription } from "./cells/TodoDescription";
 import { useTodosService } from "services/todos";
 
 export function Todos() {

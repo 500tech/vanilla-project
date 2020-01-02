@@ -1,7 +1,5 @@
 import styled, { css } from "styled-components";
 
-export const noop = () => null;
-
 export const Button = styled.button`
   border: none;
   outline: none;

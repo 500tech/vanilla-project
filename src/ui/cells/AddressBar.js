@@ -1,7 +1,7 @@
 import React, { Component, useState, useEffect } from "react";
 import styled from "styled-components";
 import { useLocation, useHistory } from "react-router-dom";
-import { Input, Button } from "ui/common";
+import { Input, Button } from "ui/atoms";
 
 const Form = styled.form`
   display: flex;
