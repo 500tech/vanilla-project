@@ -1,9 +1,10 @@
-import React, { Component, createContext, useState, useContext } from "react";
+import React, { createContext, useContext } from "react";
 import { ThemeProvider } from "styled-components";
+import { connect } from "react-redux";
 import * as themes from "themes";
+import { toggleTheme, setTheme } from "data/theme";
 
 const themeNames = Object.keys(themes);
-const [initialTheme] = themeNames;
 
 const ThemeContext = createContext();
 
@@ -13,18 +14,17 @@ export const useThemeService = () => {
   return useContext(ThemeContext);
 };
 
-export function ThemeService({ children }) {
-  const [themeName, setThemeName] = useState(initialTheme);
+export function BaseThemeService({
+  children,
+  themeName,
+  setTheme,
+  toggleTheme
+}) {
   const theme = themes[themeName];
-  const toggleTheme = () => {
-    const indexOfCurrentTheme = themeNames.indexOf(themeName);
-    const indexOfNextTheme = (indexOfCurrentTheme + 1) % themeNames.length;
-    setThemeName(themeNames[indexOfNextTheme]);
-  };
   const ctx = {
     themeName,
     themeNames,
-    setTheme: setThemeName,
+    setTheme,
     toggleTheme
   };
   return (
@@ -34,36 +34,14 @@ export function ThemeService({ children }) {
   );
 }
 
-export class ThemeServiceLegacy extends Component {
-  state = {
-    theme: initialTheme
-  };
-
-  get theme() {
-    return themes[this.state.theme];
-  }
-
-  setTheme = themeName => this.setState({ theme: themeName });
-
-  toggleTheme = () => {
-    const indexOfCurrentTheme = themeNames.indexOf(this.state.theme);
-    const indexOfNextTheme = (indexOfCurrentTheme + 1) % themeNames.length;
-    this.setTheme(themeNames[indexOfNextTheme]);
-  };
-
-  render() {
-    const { theme, setTheme } = this;
-    const ctx = {
-      setTheme,
-      themeNames,
-      themeName: this.state.theme,
-      toggleTheme: this.toggleTheme
+export const ThemeService = connect(
+  function mapStateToProps({ theme }) {
+    return {
+      themeName: theme
     };
-
-    return (
-      <ThemeContext.Provider value={ctx}>
-        <ThemeProvider theme={theme}>{this.props.children}</ThemeProvider>
-      </ThemeContext.Provider>
-    );
+  },
+  {
+    toggleTheme,
+    setTheme
   }
-}
+)(BaseThemeService);

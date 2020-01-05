@@ -1,1 +1,2 @@
-export { theme } from "./reducer";
+export * from "./reducer";
+export * from "./actions";
