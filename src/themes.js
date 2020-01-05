@@ -18,3 +18,10 @@ export const madTheme = {
     secondary: "#fcf986"
   }
 };
+
+export const pureWhite = {
+  colors: {
+    primary: "white",
+    secondary: "white"
+  }
+};

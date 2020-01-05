@@ -1,4 +1,5 @@
 import { createStore, combineReducers } from "redux";
+import { theme } from "./theme";
 
 /**
  * interface Action {
@@ -37,7 +38,8 @@ function clicks(state = 0, action) {
 
 const mainReducer = combineReducers({
   counter,
-  clicks
+  clicks,
+  theme
 });
 
 const store = createStore(mainReducer);
