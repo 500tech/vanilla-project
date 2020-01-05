@@ -4,7 +4,7 @@ import { SET_THEME, TOGGLE_THEME } from "./actions";
 const themeNames = Object.keys(themes);
 const [initialTheme] = themeNames;
 
-export function theme(themeName = initialTheme, action) {
+export function themeReducer(themeName = initialTheme, action) {
   switch (action.type) {
     case SET_THEME: {
       return action.payload;

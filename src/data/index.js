@@ -1,5 +1,5 @@
-import { createStore, combineReducers } from "redux";
-import { theme } from "./theme";
+import { configureStore } from "@reduxjs/toolkit";
+import * as reducer from "./reducer";
 
 /**
  * interface Action {
@@ -10,38 +10,9 @@ import { theme } from "./theme";
  * }
  */
 
-function counter(state = 0, action) {
-  switch (action.type) {
-    case "increment": {
-      const { payload = 1 } = action;
-      return state + payload;
-    }
-    case "decrement": {
-      const { payload = 1 } = action;
-      return state - payload;
-    }
-    default:
-      return state;
-  }
-}
-
-function clicks(state = 0, action) {
-  switch (action.type) {
-    case "increment":
-    case "decrement": {
-      return state + 1;
-    }
-    default:
-      return state;
-  }
-}
-
-const mainReducer = combineReducers({
-  counter,
-  clicks,
-  theme
+const store = configureStore({
+  reducer,
+  devTools: process.env.NODE_ENV === "development"
 });
-
-const store = createStore(mainReducer);
 
 export default store;
