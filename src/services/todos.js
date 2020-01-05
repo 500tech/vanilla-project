@@ -8,9 +8,24 @@ const fetchTodosThunk = () => async dispatch => {
   dispatch(todosActions.setTodos(todos));
 };
 
+const postTodoThunk = title => async dispatch => {
+  const response = await fetch("https://jsonplaceholder.typicode.com/todos", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      title,
+      completed: false
+    })
+  });
+  const todo = await response.json();
+  dispatch(todosActions.addTodo(todo));
+};
+
 export function useTodosService() {
   const todos = useSelector(({ todos }) => todos);
-  const addTodo = useAction(todosActions.addTodo);
+  const addTodo = useAction(postTodoThunk);
   const toggleTodo = useAction(todosActions.toggleTodo);
   const deleteTodo = useAction(todosActions.deleteTodo);
   const markAllAsDone = useAction(todosActions.markAllAsDone);

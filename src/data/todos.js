@@ -8,20 +8,6 @@ interface Todo {
 }
 */
 
-let _id = 0;
-const getId = () => _id++;
-const createTodo = (title, completed = false) => ({
-  title,
-  completed,
-  id: getId()
-});
-
-// const TODOS = [
-//   createTodo("Have morning coffee", true),
-//   createTodo("Eat lunch", true),
-//   createTodo("Make awesome things happen")
-// ];
-
 const { reducer, actions } = createSlice({
   name: "todos",
   initialState: [],
@@ -41,8 +27,8 @@ const { reducer, actions } = createSlice({
     deleteDone(todos) {
       return todos.filter(todo => !todo.completed);
     },
-    addTodo(todos, { payload: text }) {
-      todos.unshift(createTodo(text));
+    addTodo(todos, { payload: todo }) {
+      todos.unshift(todo);
     },
     setTodos(_, { payload }) {
       return payload;
