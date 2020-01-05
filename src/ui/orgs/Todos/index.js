@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { MainSection } from "ui/mols";
 import { PageControls } from "./cells/PageControls";
 import { TodoAdder } from "./cells/TodoAdder";
@@ -13,8 +13,10 @@ export function Todos() {
     toggleTodo,
     deleteTodo,
     markAllAsDone,
-    deleteDone
+    deleteDone,
+    fetchTodos
   } = useTodosService();
+  useEffect(() => void fetchTodos(), [fetchTodos]);
   return (
     <MainSection heading="My Todos List">
       <TodoAdder onAddTodo={addTodo} />

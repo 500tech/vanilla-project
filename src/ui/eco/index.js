@@ -5,7 +5,7 @@ import { Header } from "ui/cells/Header";
 import { Footer } from "ui/cells/Footer";
 
 const MainContainer = styled.div`
-  height: 100vh;
+  min-height: 100vh;
   width: 100vw;
   background-color: ${props => props.theme.colors.primary};
   color: ${props => props.theme.colors.secondary};

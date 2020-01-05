@@ -16,15 +16,15 @@ const createTodo = (title, completed = false) => ({
   id: getId()
 });
 
-const TODOS = [
-  createTodo("Have morning coffee", true),
-  createTodo("Eat lunch", true),
-  createTodo("Make awesome things happen")
-];
+// const TODOS = [
+//   createTodo("Have morning coffee", true),
+//   createTodo("Eat lunch", true),
+//   createTodo("Make awesome things happen")
+// ];
 
 const { reducer, actions } = createSlice({
   name: "todos",
-  initialState: TODOS,
+  initialState: [],
   reducers: {
     toggleTodo(todos, { payload: todoId }) {
       const todo = todos.find(todo => todo.id === todoId);
@@ -43,6 +43,9 @@ const { reducer, actions } = createSlice({
     },
     addTodo(todos, { payload: text }) {
       todos.unshift(createTodo(text));
+    },
+    setTodos(_, { payload }) {
+      return payload;
     }
   }
 });
