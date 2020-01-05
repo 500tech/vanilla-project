@@ -10,13 +10,13 @@ export function PageControls({
   return (
     <section className="controls">
       <Button
-        onClick={onMarkAllAsDone}
+        onClick={() => onMarkAllAsDone()}
         disabled={todos.every(todo => todo.completed)}
       >
         Mark all as done
       </Button>
       <Button
-        onClick={onDeleteDone}
+        onClick={() => onDeleteDone()}
         disabled={!todos.some(todo => todo.completed)}
       >
         Delete all done

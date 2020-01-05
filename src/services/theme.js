@@ -3,7 +3,7 @@ import { ThemeProvider } from "styled-components";
 import { useSelector } from "react-redux";
 import { useAction } from "services/utils";
 import * as themes from "themes";
-import * as themeActions from "data/theme";
+import { themeActions } from "data/theme";
 
 const themeNames = Object.keys(themes);
 
