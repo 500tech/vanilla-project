@@ -1,47 +1,26 @@
-import React, { createContext, useContext } from "react";
+import React from "react";
 import { ThemeProvider } from "styled-components";
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
+import { useAction } from "services/utils";
 import * as themes from "themes";
-import { toggleTheme, setTheme } from "data/theme";
+import * as themeActions from "data/theme";
 
 const themeNames = Object.keys(themes);
 
-const ThemeContext = createContext();
-
-export const ThemeConsumer = ThemeContext.Consumer;
-
 export const useThemeService = () => {
-  return useContext(ThemeContext);
-};
-
-export function BaseThemeService({
-  children,
-  themeName,
-  setTheme,
-  toggleTheme
-}) {
-  const theme = themes[themeName];
-  const ctx = {
+  const themeName = useSelector(({ theme }) => theme);
+  const setTheme = useAction(themeActions.setTheme);
+  const toggleTheme = useAction(themeActions.toggleTheme);
+  return {
     themeName,
     themeNames,
     setTheme,
     toggleTheme
   };
-  return (
-    <ThemeContext.Provider value={ctx}>
-      <ThemeProvider theme={theme}>{children}</ThemeProvider>
-    </ThemeContext.Provider>
-  );
-}
+};
 
-export const ThemeService = connect(
-  function mapStateToProps({ theme }) {
-    return {
-      themeName: theme
-    };
-  },
-  {
-    toggleTheme,
-    setTheme
-  }
-)(BaseThemeService);
+export function ThemeService({ children }) {
+  const { themeName } = useThemeService();
+  const theme = themes[themeName];
+  return <ThemeProvider theme={theme}>{children}</ThemeProvider>;
+}
