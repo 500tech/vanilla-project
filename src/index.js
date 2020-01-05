@@ -5,6 +5,9 @@ import "normalize.css";
 import { TodosService } from "services/todos";
 import { ThemeService } from "services/theme";
 import { Ecosystem } from "ui/eco";
+import store from 'data';
+
+window.store = store;
 
 ReactDOM.render(
   <Router>
