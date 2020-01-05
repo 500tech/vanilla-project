@@ -1,5 +1,4 @@
-export const SET_THEME = "setTheme";
-export const setTheme = payload => ({ type: SET_THEME, payload });
+import { createAction } from "@reduxjs/toolkit";
 
-export const TOGGLE_THEME = "toggleTheme";
-export const toggleTheme = payload => ({ type: TOGGLE_THEME, payload });
+export const setTheme = createAction("setTheme");
+export const toggleTheme = createAction("toggleTheme");
