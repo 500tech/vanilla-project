@@ -9,7 +9,7 @@ describe("themeReducer", () => {
   } = createGivenWhenThenForData(themeReducer);
 
   it("should should have the correct initial state", () => {
-    given: setup(undefined);
+    given: setup(PRESTATE);
     when: runReducerForActions([ANY_ACTION]);
     then: expectNewStateToBeTheAssertedState("lightTheme");
   });
