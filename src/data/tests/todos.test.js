@@ -47,7 +47,6 @@ describe("todosReducer", () => {
     given: setupTodos();
     when: runReducerForActions([todosActions.markAllAsDone()]);
     then: {
-      expect(todos.some(todo => !todo.completed)).toBeTruthy();
       expect(getState().every(todo => todo.completed)).toBeTruthy();
     }
   });
@@ -68,9 +67,12 @@ function generateRaondomTodo() {
 }
 
 function generateRaondomTodoList() {
-  return Array.from({ length: Math.round(Math.random() * 100) }).map(
+  const todos = Array.from({ length: 2 + Math.ceil(Math.random() * 100) }).map(
     generateRaondomTodo
   );
+  todos[0].completed = false;
+  todos[1].completed = true;
+  return todos;
 }
 
 function getTodo(todos) {
