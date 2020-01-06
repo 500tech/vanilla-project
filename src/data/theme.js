@@ -8,7 +8,8 @@ const { reducer, actions } = createSlice({
   name: "theme",
   initialState: initialTheme,
   reducers: {
-    setTheme: (_, { payload }) => payload,
+    setTheme: (themeName, { payload }) =>
+      themeNames.includes(payload) ? payload : themeName,
     toggleTheme: themeName => {
       const indexOfCurrentTheme = themeNames.indexOf(themeName);
       const indexOfNextTheme = (indexOfCurrentTheme + 1) % themeNames.length;
