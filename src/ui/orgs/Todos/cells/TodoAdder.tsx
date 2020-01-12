@@ -1,15 +1,22 @@
 import React, {
   useState,
   useEffect,
-  useCallback
+  useCallback,
+  FunctionComponent
 } from "react";
 import { noop } from "utils";
 import { Button, Input } from "ui/atoms";
 import { useAutofocus } from "hooks/autofocus";
 
-const isValid = text => text.length > 0;
+const isValid = (text: string) => text.length > 0;
 
-export function TodoAdder({ onAddTodo = noop }) {
+interface Props {
+  onAddTodo?: (text: string) => void;
+}
+
+export const TodoAdder: FunctionComponent<Props> = function TodoAdder({
+  onAddTodo = noop
+}) {
   const [text, setText] = useState("");
   const input = useAutofocus();
   useEffect(() => {
@@ -52,4 +59,4 @@ export function TodoAdder({ onAddTodo = noop }) {
       </form>
     </section>
   );
-}
+};
