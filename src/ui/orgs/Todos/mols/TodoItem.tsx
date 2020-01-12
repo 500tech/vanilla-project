@@ -3,12 +3,7 @@ import styled from "styled-components";
 import propTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { noop } from "utils";
-
-interface Todo {
-  id: number;
-  title: string;
-  completed: boolean;
-}
+import { Todo } from "types";
 
 interface TodoItemProps {
   todo: Todo;
