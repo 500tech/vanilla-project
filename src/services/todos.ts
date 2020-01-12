@@ -1,14 +1,14 @@
-import { useSelector } from "react-redux";
-import { useAction } from "services/utils";
+import { useAction, useSelector } from "services/utils";
 import { todosActions } from "data/todos";
+import { Dispatch } from "react";
 
-const fetchTodosThunk = () => async dispatch => {
+const fetchTodosThunk = () => async (dispatch: Dispatch<any>) => {
   const response = await fetch("https://jsonplaceholder.typicode.com/todos");
   const todos = await response.json();
   dispatch(todosActions.setTodos(todos));
 };
 
-const postTodoThunk = title => async dispatch => {
+const postTodoThunk = (title: string) => async (dispatch: Dispatch<any>) => {
   const response = await fetch("https://jsonplaceholder.typicode.com/todos", {
     method: "POST",
     headers: {

@@ -1,7 +1,6 @@
 import React from "react";
 import { ThemeProvider } from "styled-components";
-import { useSelector } from "react-redux";
-import { useAction } from "services/utils";
+import { useAction, useSelector } from "services/utils";
 import * as themes from "themes";
 import { themeActions } from "data/theme";
 
@@ -19,8 +18,8 @@ export const useThemeService = () => {
   };
 };
 
-export function ThemeService({ children }) {
+export const ThemeService: React.FC = function ThemeService({ children }) {
   const { themeName } = useThemeService();
   const theme = themes[themeName];
   return <ThemeProvider theme={theme}>{children}</ThemeProvider>;
-}
+};

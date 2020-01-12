@@ -1,15 +1,8 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { configureStore, StateFromReducersMapObject } from "@reduxjs/toolkit";
 import middleware from "./middleware";
 import * as reducer from "./reducer";
 
-/**
- * interface Action {
- *    type: string;
- *    payload?: any;
- *    meta?: object;
- *    error?: Error;
- * }
- */
+export type State = StateFromReducersMapObject<typeof reducer>;
 
 const store = configureStore({
   reducer,

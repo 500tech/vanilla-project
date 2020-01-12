@@ -1,16 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-
-/*
-interface Todo {
-  id: number;
-  title: string;
-  completed: bool;
-}
-*/
+import { Todo } from "types";
 
 const { reducer, actions } = createSlice({
   name: "todos",
-  initialState: [],
+  initialState: [] as Todo[],
   reducers: {
     toggleTodo(todos, { payload: todoId }) {
       const todo = todos.find(todo => todo.id === todoId);
