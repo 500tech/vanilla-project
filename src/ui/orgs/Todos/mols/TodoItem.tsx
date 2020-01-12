@@ -1,16 +1,23 @@
-import React, { memo } from "react";
+import React, { memo, FunctionComponent } from "react";
 import styled from "styled-components";
+import propTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { noop } from "utils";
-/*
+
 interface Todo {
   id: number;
   title: string;
-  completed: bool;
+  completed: boolean;
 }
-*/
 
-const BaseTodoItem = ({
+interface TodoItemProps {
+  todo: Todo;
+  onToggle?: (todoId: Todo["id"]) => void;
+  onDelete?: (todoId: Todo["id"]) => void;
+  className?: string;
+}
+
+const BaseTodoItem: FunctionComponent<TodoItemProps> = ({
   todo,
   onToggle = noop,
   onDelete = noop,
@@ -69,3 +76,13 @@ export const TodoItem = styled(memo(BaseTodoItem))`
     margin-left: 5px;
   }
 `;
+
+TodoItem.propTypes = {
+  onToggle: propTypes.func,
+  onDelete: propTypes.func,
+  todo: propTypes.shape({
+    id: propTypes.number.isRequired,
+    title: propTypes.string.isRequired,
+    completed: propTypes.bool.isRequired
+  }).isRequired
+};
