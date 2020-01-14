@@ -10,7 +10,9 @@ export class TodoAdder extends Component {
   input = createRef();
 
   componentDidMount() {
-    this.input.current.focus();
+    if (this.input.current) {
+      this.input.current.focus();
+    }
   }
 
   componentDidUpdate(_prevProps, prevState) {
