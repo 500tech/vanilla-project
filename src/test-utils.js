@@ -1,8 +1,8 @@
-import React from "react";
-import { mount } from "enzyme";
-import { ThemeProvider } from "styled-components";
-import { MemoryRouter } from "react-router-dom";
-import { lightTheme } from "themes";
+import React from 'react';
+import { mount } from 'enzyme';
+import { ThemeProvider } from 'styled-components';
+import { MemoryRouter } from 'react-router-dom';
+import { lightTheme } from 'themes';
 
 export const withTheme = node => (
   <ThemeProvider theme={lightTheme}>{node}</ThemeProvider>
@@ -14,7 +14,7 @@ export const mountIntegration = (node, routerProps = {}) =>
   mount(<MemoryRouter {...routerProps}>{withTheme(node)}</MemoryRouter>);
 
 export const PRESTATE = undefined;
-export const ANY_ACTION = { type: "foo" + Math.random() };
+export const ANY_ACTION = { type: 'foo' + Math.random() };
 
 export function createGivenWhenThenForData(reducer) {
   let currentState, newState;
@@ -41,6 +41,6 @@ export function createGivenWhenThenForData(reducer) {
     runReducerForActions,
     expectNewStateToBeTheAssertedState,
     expectStateToHaveChanged,
-    getState
+    getState,
   };
 }

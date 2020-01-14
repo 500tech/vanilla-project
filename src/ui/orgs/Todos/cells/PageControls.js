@@ -1,11 +1,11 @@
-import React from "react";
-import { noop } from "utils";
-import { Button } from "ui/atoms";
+import React from 'react';
+import { noop } from 'utils';
+import { Button } from 'ui/atoms';
 
 export function PageControls({
   onMarkAllAsDone = noop,
   onDeleteDone = noop,
-  todos
+  todos,
 }) {
   return (
     <section className="controls">

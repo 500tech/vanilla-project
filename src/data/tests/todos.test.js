@@ -1,29 +1,29 @@
-import { PRESTATE, ANY_ACTION, createGivenWhenThenForData } from "test-utils";
-import { todosActions, todosReducer } from "data/todos";
+import { PRESTATE, ANY_ACTION, createGivenWhenThenForData } from 'test-utils';
+import { todosActions, todosReducer } from 'data/todos';
 
-describe("todosReducer", () => {
+describe('todosReducer', () => {
   let todos, todo, index;
   const {
     setup,
     runReducerForActions,
     expectNewStateToBeTheAssertedState,
     expectStateToHaveChanged,
-    getState
+    getState,
   } = createGivenWhenThenForData(todosReducer);
 
-  it("should should have the correct initial state", () => {
+  it('should should have the correct initial state', () => {
     given: setup(PRESTATE);
     when: runReducerForActions([ANY_ACTION]);
     then: expectNewStateToBeTheAssertedState([]);
   });
 
-  it("should set to state", () => {
+  it('should set to state', () => {
     given: setupTodos();
     when: runReducerForActions([todosActions.setTodos([])]);
     then: expectNewStateToBeTheAssertedState([]);
   });
 
-  it("should toggle", () => {
+  it('should toggle', () => {
     given: setupTodos();
     when: runReducerForActions([todosActions.toggleTodo(todo.id)]);
     then: {
@@ -33,7 +33,7 @@ describe("todosReducer", () => {
     }
   });
 
-  it("should delete", () => {
+  it('should delete', () => {
     given: setupTodos();
     when: runReducerForActions([todosActions.deleteTodo(todo.id)]);
     then: {
@@ -43,7 +43,7 @@ describe("todosReducer", () => {
     }
   });
 
-  it("should mark all as done", () => {
+  it('should mark all as done', () => {
     given: setupTodos();
     when: runReducerForActions([todosActions.markAllAsDone()]);
     then: {
@@ -61,7 +61,7 @@ describe("todosReducer", () => {
 
 function generateRaondomTodo() {
   const id = Math.round(Math.random() * 1000000);
-  const title = new Array(Math.round(Math.random() * 10)).fill("a").join("");
+  const title = new Array(Math.round(Math.random() * 10)).fill('a').join('');
   const completed = !!Math.round(Math.random());
   return { id, title, completed };
 }

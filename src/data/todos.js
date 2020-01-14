@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 /*
 interface Todo {
@@ -9,7 +9,7 @@ interface Todo {
 */
 
 const { reducer, actions } = createSlice({
-  name: "todos",
+  name: 'todos',
   initialState: [],
   reducers: {
     toggleTodo(todos, { payload: todoId }) {
@@ -32,8 +32,8 @@ const { reducer, actions } = createSlice({
     },
     setTodos(_, { payload }) {
       return payload;
-    }
-  }
+    },
+  },
 });
 
 export const todosReducer = reducer;

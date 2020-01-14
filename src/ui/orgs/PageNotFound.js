@@ -1,6 +1,6 @@
-import React, { Component, useState, useEffect } from "react";
-import { Redirect, useLocation } from "react-router-dom";
-import { MainSection } from "ui/mols";
+import React, { Component, useState, useEffect } from 'react';
+import { Redirect, useLocation } from 'react-router-dom';
+import { MainSection } from 'ui/mols';
 
 export function PageNotFound() {
   const [ttr, setTtr] = useState(3);
@@ -23,13 +23,13 @@ export function PageNotFound() {
 
 export class PageNotFoundLegacy extends Component {
   state = {
-    ttr: 3
+    ttr: 3,
   };
 
   componentDidMount() {
     this.timer = setInterval(() => {
       this.setState({
-        ttr: this.state.ttr - 1
+        ttr: this.state.ttr - 1,
       });
     }, 1000);
   }

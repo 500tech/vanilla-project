@@ -1,11 +1,11 @@
-import { createSlice } from "@reduxjs/toolkit";
-import * as themes from "themes";
+import { createSlice } from '@reduxjs/toolkit';
+import * as themes from 'themes';
 
 const themeNames = Object.keys(themes);
 const [initialTheme] = themeNames;
 
 const { reducer, actions } = createSlice({
-  name: "theme",
+  name: 'theme',
   initialState: initialTheme,
   reducers: {
     setTheme: (themeName, { payload }) =>
@@ -14,8 +14,8 @@ const { reducer, actions } = createSlice({
       const indexOfCurrentTheme = themeNames.indexOf(themeName);
       const indexOfNextTheme = (indexOfCurrentTheme + 1) % themeNames.length;
       return themeNames[indexOfNextTheme];
-    }
-  }
+    },
+  },
 });
 
 export const themeReducer = reducer;

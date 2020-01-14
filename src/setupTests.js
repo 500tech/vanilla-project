@@ -1,9 +1,9 @@
-import "@testing-library/jest-dom/extend-expect";
-import { configure } from "enzyme";
-import Adapter from "enzyme-adapter-react-16";
-import reactDOM from "react-dom";
+import '@testing-library/jest-dom/extend-expect';
+import { configure } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+import reactDOM from 'react-dom';
 
-const attachTo = global.document.createElement("div");
+const attachTo = global.document.createElement('div');
 
 class ReactAdapterWithMountTracking extends Adapter {
   createRenderer(options) {

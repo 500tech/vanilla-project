@@ -1,7 +1,7 @@
-import React, { Component, useState, useEffect } from "react";
-import styled from "styled-components";
-import { useLocation, useHistory } from "react-router-dom";
-import { Input, Button } from "ui/atoms";
+import React, { Component, useState, useEffect } from 'react';
+import styled from 'styled-components';
+import { useLocation, useHistory } from 'react-router-dom';
+import { Input, Button } from 'ui/atoms';
 
 const Form = styled.form`
   display: flex;
@@ -37,7 +37,7 @@ export class BaseAddressBarLegacy extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      url: this.props.location.pathname
+      url: this.props.location.pathname,
     };
   }
 

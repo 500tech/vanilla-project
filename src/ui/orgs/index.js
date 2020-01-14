@@ -1,8 +1,8 @@
-import React, { lazy, Suspense } from "react";
-import { Route, Switch } from "react-router-dom";
-const Home = lazy(() => import("ui/orgs/Home"));
-const Todos = lazy(() => import("ui/orgs/Todos"));
-const PageNotFound = lazy(() => import("ui/orgs/PageNotFound"));
+import React, { lazy, Suspense } from 'react';
+import { Route, Switch } from 'react-router-dom';
+const Home = lazy(() => import('ui/orgs/Home'));
+const Todos = lazy(() => import('ui/orgs/Todos'));
+const PageNotFound = lazy(() => import('ui/orgs/PageNotFound'));
 
 function Spinner() {
   return <div>Loading...</div>;

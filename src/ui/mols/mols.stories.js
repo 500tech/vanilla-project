@@ -1,15 +1,15 @@
-import React from "react";
-import { text, number } from "@storybook/addon-knobs";
-import { MainSection } from "ui/mols";
+import React from 'react';
+import { text, number } from '@storybook/addon-knobs';
+import { MainSection } from 'ui/mols';
 
 export default {
-  title: "molecules"
+  title: 'molecules',
 };
 
 export const MainSectionMol = () => (
-  <MainSection heading={text("Heading", "Sample heading")}>
+  <MainSection heading={text('Heading', 'Sample heading')}>
     <section>
-      {Array.from({ length: number("# lines", 2) }).map((_, idx) => (
+      {Array.from({ length: number('# lines', 2) }).map((_, idx) => (
         <p key={idx}>This Is line #{idx + 1}</p>
       ))}
     </section>
@@ -20,4 +20,4 @@ export const MainSectionMol = () => (
   </MainSection>
 );
 
-MainSectionMol.story = { name: "MainSection" };
+MainSectionMol.story = { name: 'MainSection' };

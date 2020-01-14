@@ -1,7 +1,7 @@
-import React, { memo } from "react";
-import styled from "styled-components";
-import { Link } from "react-router-dom";
-import { noop } from "utils";
+import React, { memo } from 'react';
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+import { noop } from 'utils';
 /*
 interface Todo {
   id: number;
@@ -14,16 +14,16 @@ const BaseTodoItem = ({
   todo,
   onToggle = noop,
   onDelete = noop,
-  className
+  className,
 }) => {
   return (
     <li
       tabIndex={0}
       className={className}
       onKeyDown={e => {
-        if (e.key === "Backspace") {
+        if (e.key === 'Backspace') {
           onDelete(todo.id);
-        } else if (e.key === " ") {
+        } else if (e.key === ' ') {
           onToggle(todo.id);
         }
       }}
@@ -52,7 +52,7 @@ export const TodoItem = styled(memo(BaseTodoItem))`
 
     span {
       text-decoration: underline
-        ${props => (props.todo.completed ? "line-through" : "")};
+        ${props => (props.todo.completed ? 'line-through' : '')};
     }
   }
 
@@ -62,7 +62,7 @@ export const TodoItem = styled(memo(BaseTodoItem))`
 
   span {
     text-decoration: ${props =>
-      props.todo.completed ? "line-through" : "none"};
+      props.todo.completed ? 'line-through' : 'none'};
   }
 
   a {

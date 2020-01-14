@@ -1,9 +1,9 @@
-import React from "react";
-import { ThemeProvider } from "styled-components";
-import { useSelector } from "react-redux";
-import { useAction } from "services/utils";
-import * as themes from "themes";
-import { themeActions } from "data/theme";
+import React from 'react';
+import { ThemeProvider } from 'styled-components';
+import { useSelector } from 'react-redux';
+import { useAction } from 'services/utils';
+import * as themes from 'themes';
+import { themeActions } from 'data/theme';
 
 const themeNames = Object.keys(themes);
 
@@ -15,7 +15,7 @@ export const useThemeService = () => {
     themeName,
     themeNames,
     setTheme,
-    toggleTheme
+    toggleTheme,
   };
 };
 

@@ -1,97 +1,97 @@
-import React from "react";
-import { mountIntegration } from "test-utils";
-import { TodoAdder } from "ui/orgs/Todos/cells/TodoAdder";
+import React from 'react';
+import { mountIntegration } from 'test-utils';
+import { TodoAdder } from 'ui/orgs/Todos/cells/TodoAdder';
 
 jest.useFakeTimers();
 
-describe("<TodoAdder>", () => {
+describe('<TodoAdder>', () => {
   let wrapper, input, inputEl, button, buttonEl, addTodo;
 
-  it("should have focus on the input, no text and disabled button", () => {
+  it('should have focus on the input, no text and disabled button', () => {
     given: setup();
     then: {
       expectInputToBeFocused();
-      expectInputToBe("");
+      expectInputToBe('');
       expectAddDisabled();
     }
   });
 
-  it("should checnge input value & enable the button when user types", () => {
+  it('should checnge input value & enable the button when user types', () => {
     given: setup();
-    when: typeIntoTextbox("hello");
+    when: typeIntoTextbox('hello');
     then: {
       expectAddEnabled();
-      expectInputToBe("hello");
+      expectInputToBe('hello');
     }
   });
 
   it('should auto clear when text contains "clear"', () => {
     given: setup();
-    when: typeIntoTextbox("hello clearer");
+    when: typeIntoTextbox('hello clearer');
     then: {
-      expectInputToBe("");
+      expectInputToBe('');
       expectAddDisabled();
     }
   });
 
-  it("should submit input text on add button click", () => {
+  it('should submit input text on add button click', () => {
     given: setup();
     when: {
-      typeIntoTextbox("hello");
+      typeIntoTextbox('hello');
       clickAdd();
     }
     then: {
-      expectInputToBe("");
+      expectInputToBe('');
       expectAddDisabled();
-      expectTodoAddedWithTitle("hello");
+      expectTodoAddedWithTitle('hello');
     }
   });
 
-  it("should submit input text on input enter press", () => {
+  it('should submit input text on input enter press', () => {
     given: setup();
     when: {
-      typeIntoTextbox("hello");
+      typeIntoTextbox('hello');
       clickEnterOnInput();
     }
     then: {
-      expectInputToBe("");
+      expectInputToBe('');
       expectAddDisabled();
-      expectTodoAddedWithTitle("hello");
+      expectTodoAddedWithTitle('hello');
     }
   });
 
-  it("should not submit on enter with no text", () => {
+  it('should not submit on enter with no text', () => {
     given: setup();
     when: clickEnterOnInput();
     then: expectNoTodoWasAdded();
   });
 
-  it("should autosubmit after 3 seconds", () => {
+  it('should autosubmit after 3 seconds', () => {
     given: setup();
     when: {
-      typeIntoTextbox("hello");
+      typeIntoTextbox('hello');
       waitForAutosubmitPeriod();
     }
     then: {
-      expectInputToBe("");
+      expectInputToBe('');
       expectAddDisabled();
-      expectTodoAddedWithTitle("hello");
+      expectTodoAddedWithTitle('hello');
     }
   });
 
   function setup() {
     addTodo = jest.fn();
     wrapper = mountIntegration(<TodoAdder onAddTodo={addTodo} />);
-    input = wrapper.find("input");
+    input = wrapper.find('input');
     inputEl = input.getDOMNode();
-    button = wrapper.find("button");
+    button = wrapper.find('button');
     buttonEl = button.getDOMNode();
   }
   const expectInputToBe = text => expect(inputEl).toHaveValue(text);
   const typeIntoTextbox = text =>
-    input.simulate("change", { target: { value: text } });
-  const clickEnterOnInput = () => input.simulate("submit");
-  const clickAdd = () => button.simulate("submit");
+    input.simulate('change', { target: { value: text } });
+  const clickEnterOnInput = () => input.simulate('submit');
+  const clickAdd = () => button.simulate('submit');
   const expectAddDisabled = () => expect(buttonEl).toBeDisabled();
   const expectAddEnabled = () => expect(buttonEl).toBeEnabled();
   const expectInputToBeFocused = () => expect(inputEl).toHaveFocus();

@@ -1,7 +1,7 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { MainSection } from "ui/mols";
-import { useAutofocus } from "hooks/autofocus";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { MainSection } from 'ui/mols';
+import { useAutofocus } from 'hooks/autofocus';
 
 export function Home() {
   const link = useAutofocus();

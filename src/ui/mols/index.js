@@ -1,5 +1,5 @@
-import React from "react";
-import { Main } from "ui/atoms";
+import React from 'react';
+import { Main } from 'ui/atoms';
 
 export function MainSection({ children, heading }) {
   return (

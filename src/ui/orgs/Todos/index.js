@@ -1,10 +1,10 @@
-import React, { useEffect } from "react";
-import { MainSection } from "ui/mols";
-import { PageControls } from "./cells/PageControls";
-import { TodoAdder } from "./cells/TodoAdder";
-import { TodoList } from "./cells/TodoList";
-import { TodoDescription } from "./cells/TodoDescription";
-import { useTodosService } from "services/todos";
+import React, { useEffect } from 'react';
+import { MainSection } from 'ui/mols';
+import { PageControls } from './cells/PageControls';
+import { TodoAdder } from './cells/TodoAdder';
+import { TodoList } from './cells/TodoList';
+import { TodoDescription } from './cells/TodoDescription';
+import { useTodosService } from 'services/todos';
 
 export function Todos() {
   const {
@@ -14,7 +14,7 @@ export function Todos() {
     deleteTodo,
     markAllAsDone,
     deleteDone,
-    fetchTodos
+    fetchTodos,
   } = useTodosService();
   useEffect(() => void fetchTodos(), [fetchTodos]);
   return (

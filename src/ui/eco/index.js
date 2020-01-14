@@ -1,8 +1,8 @@
-import React, { Component } from "react";
-import styled from "styled-components";
-import { Organisms } from "ui/orgs";
-import { Header } from "ui/cells/Header";
-import { Footer } from "ui/cells/Footer";
+import React, { Component } from 'react';
+import styled from 'styled-components';
+import { Organisms } from 'ui/orgs';
+import { Header } from 'ui/cells/Header';
+import { Footer } from 'ui/cells/Footer';
 
 const MainContainer = styled.div`
   min-height: 100vh;

@@ -1,9 +1,9 @@
-import React from "react";
-import styled from "styled-components";
-import { Link } from "react-router-dom";
-import { HeaderSection } from "ui/atoms";
-import { AddressBar } from "ui/cells/AddressBar";
-import { useThemeService } from "services/theme";
+import React from 'react';
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+import { HeaderSection } from 'ui/atoms';
+import { AddressBar } from 'ui/cells/AddressBar';
+import { useThemeService } from 'services/theme';
 
 const Nav = styled.nav`
   &&& {

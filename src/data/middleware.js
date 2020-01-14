@@ -1,5 +1,5 @@
-import logger from "redux-logger";
-import { getDefaultMiddleware } from "@reduxjs/toolkit";
+import logger from 'redux-logger';
+import { getDefaultMiddleware } from '@reduxjs/toolkit';
 
 // const myLogger = store => next => action => {
 //   const stale = store.getState();
@@ -18,5 +18,5 @@ import { getDefaultMiddleware } from "@reduxjs/toolkit";
 
 export default [
   ...getDefaultMiddleware(),
-  process.env.NODE_ENV === "development" && logger
+  process.env.NODE_ENV === 'development' && logger,
 ].filter(Boolean);

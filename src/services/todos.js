@@ -1,23 +1,23 @@
-import { useSelector } from "react-redux";
-import { useAction } from "services/utils";
-import { todosActions } from "data/todos";
+import { useSelector } from 'react-redux';
+import { useAction } from 'services/utils';
+import { todosActions } from 'data/todos';
 
 const fetchTodosThunk = () => async dispatch => {
-  const response = await fetch("https://jsonplaceholder.typicode.com/todos");
+  const response = await fetch('https://jsonplaceholder.typicode.com/todos');
   const todos = await response.json();
   dispatch(todosActions.setTodos(todos));
 };
 
 const postTodoThunk = title => async dispatch => {
-  const response = await fetch("https://jsonplaceholder.typicode.com/todos", {
-    method: "POST",
+  const response = await fetch('https://jsonplaceholder.typicode.com/todos', {
+    method: 'POST',
     headers: {
-      "Content-Type": "application/json"
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify({
       title,
-      completed: false
-    })
+      completed: false,
+    }),
   });
   const todo = await response.json();
   dispatch(todosActions.addTodo(todo));
@@ -38,6 +38,6 @@ export function useTodosService() {
     deleteDone,
     deleteTodo,
     markAllAsDone,
-    fetchTodos
+    fetchTodos,
   };
 }

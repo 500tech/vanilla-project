@@ -1,5 +1,5 @@
-import React from "react";
-import { FooterSection } from "ui/atoms";
+import React from 'react';
+import { FooterSection } from 'ui/atoms';
 
 export function Footer({ copyrightExpiary, name }) {
   const currentDate = new Date();
