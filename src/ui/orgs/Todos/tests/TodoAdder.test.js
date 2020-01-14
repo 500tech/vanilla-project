@@ -5,8 +5,6 @@ import { TodoAdder } from 'ui/orgs/Todos/cells/TodoAdder';
 jest.useFakeTimers();
 
 describe('<TodoAdder>', () => {
-  let wrapper, input, inputEl, button, buttonEl, addTodo;
-
   it('should have focus on the input, no text and disabled button', () => {
     given: setup();
     then: {
@@ -78,6 +76,7 @@ describe('<TodoAdder>', () => {
       expectTodoAddedWithTitle('hello');
     }
   });
+  let wrapper, input, inputEl, button, buttonEl, addTodo;
 
   function setup() {
     addTodo = jest.fn();
