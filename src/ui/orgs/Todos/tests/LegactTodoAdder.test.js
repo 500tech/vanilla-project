@@ -5,7 +5,7 @@ import { TodoAdder } from 'ui/orgs/Todos/cells/TodoAdder';
 
 jest.useFakeTimers();
 
-describe('<TodoAdder (legacy)>', () => {
+describe.only('<TodoAdder (legacy)>', () => {
   it('should have focus on input', () => {
     const wrapper = mountIntegration(<TodoAdder />);
 
